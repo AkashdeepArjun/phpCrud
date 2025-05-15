@@ -1,0 +1,27 @@
+html{
+    font-size: 8px;
+}
+
+.cont{
+    position:fixed; 
+    left: 25vw;
+    top: 12.5vh;
+    width: max-content;
+    height: max-content;
+    display: grid;
+    padding: 2rem;
+    border: 0.25rem solid gray;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,1fr);
+    gap: 3rem;
+    background-color:#d73296ff;
+    font-size: 1rem;
+
+}
+
+input{
+    border: 0.125rem solid #fdf;
+    border-radius: 2rem;
+    padding: 2rem;
+
+}

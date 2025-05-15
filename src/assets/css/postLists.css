@@ -1,0 +1,29 @@
+
+html{
+    font-size: 8px;
+}
+
+a{
+    color: #3498db;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+
+th{
+    background-color: #f4f4f4;
+}
+th,td{
+    padding: 1.25rem;
+    border: 0.25rem solid #ddd;
+    text-align: left;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+a .del{
+    color: red;
+}
