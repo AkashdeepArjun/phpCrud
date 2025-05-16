@@ -1,11 +1,8 @@
-
 <?php
-
 error_reporting(E_ALL);
-ini_set('display_errors',true);
-ini_set('html_errors',true);
 ini_set('short_open_tag', 1); 
-
+ini_set('display_errors',0);
+ini_set('log_errors',1);
 define('PROJECT_ROOT', realpath(__DIR__));
 
 define('BASE_URL','/');
@@ -36,8 +33,3 @@ try {
 }
 
 ?>
-
-
-
-
-

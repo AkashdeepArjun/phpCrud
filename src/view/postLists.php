@@ -53,6 +53,17 @@
                 </tbody>
             </thead>
         </table>
-    
+
+
+        <script>
+        const force_reload =(e)=>{
+            if(e.persisted){
+                window.location.reload();
+            }
+        }
+        window.addEventListener("pageshow",force_reload);
+    </script>
+
+
     </body>
 </html>

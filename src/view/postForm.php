@@ -11,7 +11,7 @@
 
             <h1><?=$post['id']?'Edit Post':'Create new Post'?></h1>
 
-<form  class="cont" action="index.php?route=posts/<?=$post['id']?'update':'save'?>" method="POST">
+<form id="myform"  class="cont" action="index.php?route=posts/<?=$post['id']?'update':'save'?>" method="POST">
 
             <?php if($post['id']):?>
 
@@ -25,30 +25,14 @@
 
                 <button type="submit"><?= $post['id']?'Update':'Save' ?></button>
 </form>         
+               
+               
+                </div>
 
+                <script>
+                        const url = 'index.php?route=posts/<?=$post["id"]?"update":"save"?>';
+                </script>       
 
-            
-
-
-
-
-
-
-            
-
-
-                
-        </form>
-                          
-
-
-
-           </div>
-
-             
-        
-            
-        
-
+<script type="text/javascript" src="<?=BASE_URL?>assets/js/postForm.js"></script>       
     </body>
 </html>

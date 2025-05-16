@@ -1,8 +1,6 @@
 <?php
-
-            
+ob_clean();            
 require_once PROJECT_ROOT.'/model/Post.php';
-
 function listposts(){
 
     $posts=Post::all();
@@ -20,7 +18,7 @@ function createPost(){
 }
 
 function savePost(){
-
+    ob_clean();
     if($_SERVER['REQUEST_METHOD']=='POST'){
 
         $title=trim($_POST['title']);
@@ -28,7 +26,8 @@ function savePost(){
 
         if($title && $content){
             Post::create($title,$content);
-            header('Location: index.php?route=posts');
+            header('Content-Type: application/json');
+            echo json_encode(['redirect'=>BASE_URL .'index.php?route=posts']);
             exit;
 
         } 
@@ -58,63 +57,33 @@ function editPost(){
 }
 
 function updatePost(){
-
+    ob_clean();
     if($_SERVER['REQUEST_METHOD']=='POST'){
-
-        
         $id=trim($_POST['id']);
         $title=trim($_POST['title']);
         $content=trim($_POST['content']);
-
         if($id && $title && $content){
 
-    Post::update($id,$title, $content);
-    header('Location:'.BASE_URL.'index.php?route=posts');
-    exit;
-
+            Post::update($id,$title, $content);
+            header('Content-Type: application/json');
+            echo json_encode(['redirect'=>BASE_URL .'index.php?route=posts']);
+            exit;
     }
-
-
 }
-
+    header('Content-Type: application/json');
+    http_response_code(400);
+    echo json_encode(['error'=>'invalid request']);
+    exit;
 }
 
 function deletePost(){
-
-    /* if(isset($_GET['action']) && $_GET['action']==='delete'){ */
-
-                
             $id=$_GET['id']??null;
-            
         if($id){
                 
             Post::delete($id);
-            /* header('Location:src/index.php?route=posts'); */
-
             header('Location:'.BASE_URL.'index.php?route=posts');
             exit;
 
         }    
-
-
-
-    /* } */
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
-    
