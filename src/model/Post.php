@@ -52,6 +52,25 @@ static function delete($id){
         }
 
 
+        static function search_by_title_content($term){
+                
+                $trimmed = trim($term);
+
+                if ($trimmed==='' | strlen($trimmed)===0) {
+                        error_log(__FILE__.' :QUERY EMPTY');
+                        return [];
+                }
+
+                $db =getDB();
+                $stmt=$db->prepare("SELECT  * FROM posts WHERE title LIKE ? OR content LIKE ? LIMIT 10");
+                $key="%$trimmed%";
+                $stmt->execute([$key,$key]);
+                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        }
+
+
 
 
 }

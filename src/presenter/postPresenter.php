@@ -86,4 +86,31 @@ function deletePost(){
 
         }    
 }
+
+function search_posts(){
+    
+    $q=$_GET['q']??'';
+    $q=trim($q);
+    if($q!=''){
+        
+        $results=Post::search_by_title_content($q);
+
+        if($results){
+            echo json_encode(['data'=>$results]);
+        }else{
+           echo json_encode(['error'=>'could not load data']);
+        }
+
+
+
+
+    }
+
+
+
+
+}
+
+
+
 ?>

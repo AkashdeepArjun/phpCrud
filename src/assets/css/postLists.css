@@ -3,6 +3,10 @@ html{
     font-size: 8px;
 }
 
+/* body{ */
+/*     background-color: green; */
+/* } */
+
 a{
     color: #3498db;
     text-decoration: none;
@@ -27,3 +31,38 @@ table{
 a .del{
     color: red;
 }
+
+
+.search_bar{
+border: 0.25rem sold gray;
+padding: 0.75rem;
+width: 25rem;
+height: 2rem;
+position: absolute;
+left: 22%;
+top: 2%;
+}
+
+
+.search_bar:hover,
+.search_bar:focus{
+    border: 0.25rem solid green;
+
+}
+
+#search_results{
+    height: max-content;
+    width: 25rem;
+    position: absolute;
+    top:12%;
+    left: 22%;
+    background-color:#506973ff;
+    padding-left: 1rem;
+}
+
+#search_results>*:hover{
+background-color: yellow;
+    color: magenta;
+}
+
+

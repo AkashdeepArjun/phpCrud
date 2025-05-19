@@ -1,13 +1,27 @@
+<?php
+$css_path=BASE_URL.'assets/css/postLists.css';
+$js_path=BASE_URL.'assets/js/live_search.js';
+$ver=file_exists($css_path)?filemtime($css_path):time();
+$js_ver=file_exists($js_path)?filemtime($js_path):time();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title></title>
-        <link href="<?= BASE_URL?>assets/css/postLists.css" rel="stylesheet">
+        <link href="<?= BASE_URL ?>assets/css/postLists.css?v=<?=$ver?>" rel="stylesheet">
     </head>
     <body>
 
+        <input id="search" type="text" class="search_bar" placeholder="search items">
+        <div id="search_results">
+            
+        </div>
+        <!-- <h1>BASE URL is <?= BASE_URL ?></h1> -->
         <h1>Posts</h1>
         <a href="index.php?route=posts/create">Create New Post</a>
         <table>
@@ -64,6 +78,9 @@
         window.addEventListener("pageshow",force_reload);
     </script>
 
+<script type="text/javascript" src="<?= BASE_URL ?>assets/js/live_search.js?v=<?=$js_ver?>">
+            
+        </script>
 
     </body>
 </html>
