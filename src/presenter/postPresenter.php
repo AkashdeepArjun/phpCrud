@@ -9,6 +9,25 @@ function listposts(){
 
 }
 
+function post_details(){
+    
+    $id= $_GET['id']??null;
+    if($id){
+
+        $post = Post::find($id);
+        
+        if($post){
+            
+            require PROJECT_ROOT.'/view/postDetail.php';
+        
+        }
+        
+
+    }
+    
+
+}
+
 function createPost(){
     
     $post =['title'=>'','content'=>'','id'=>null];

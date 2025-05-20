@@ -1,0 +1,19 @@
+html{
+    font-size: 8px;
+}
+
+
+.cont{
+position: absolute;
+left: 25%;
+top: 25%;
+background-color:#b9968c ;
+width: 25rem;
+height: 20rem;
+display: grid;
+grid-template-columns: repeat(2,1fr);
+grid-template-rows: 1f;
+
+
+
+}

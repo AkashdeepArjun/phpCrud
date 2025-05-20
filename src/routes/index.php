@@ -26,9 +26,13 @@
         require_once PROJECT_ROOT.'/presenter/postPresenter.php';
         deletePost();
         break;
-    case 'posts/search';
+    case 'posts/search':
         require_once PROJECT_ROOT.'/presenter/postPresenter.php';
         search_posts();
+        break;
+    case 'posts/details':
+        require_once PROJECT_ROOT.'/presenter/postPresenter.php';
+        post_details();
         break;
     default:
         echo "404 not found ";

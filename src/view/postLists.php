@@ -46,7 +46,7 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
 
                     <tr> 
                         <td>
-                            <?= htmlspecialchars($post['title'])?> 
+                            <a href="index.php?route=posts/details&id=<?=$post['id']?>"><?= htmlspecialchars($post['title'])?></a>
                         </td>
                         <td>
                             <?=htmlspecialchars($post['content'])?> 
