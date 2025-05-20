@@ -5,48 +5,70 @@ document.addEventListener("DOMContentLoaded",()=>{
     const search_results=document.getElementById('search_results');
     var data=null;
     let last_query='';
-   
-    search.addEventListener("input",async()=>{
-        search_results.innerHTML='';
 
-        const query=search.value.trim();
-        last_query=query;
-        if (!query) {
-            // console.log('lolwa and polwa');
-            // search.innerHTML='';
-            data=null;
-            // console.log('query emptied');
-            search_results.innerHTML=''
-            return;
+    const query_data=async (query)=>{
+   
+    last_query=query;
+    search_results.innerHTML='';
+    
+    if(!query) return;
+    try {
+      const result=await fetch(`index.php?route=posts/search&q=${encodeURIComponent(query)}`);
+        const json_data= await result.json();
+        const data =json_data.data;
+
+            if(query!=last_query) return;
+            
+            if(data?.length){
+                
+                data.forEach(item=> {
+                    const element = document.createElement('p');
+                   element.textContent=item.title;
+                    search_results.appendChild(element);
+                
+
+                });
+
+
+
+            }else{
+
+                    const element = document.createElement('p');
+                    element.textConten="data did not avaialble";
+                    element.style.color="gray";
+                    search_results.appendChild(element);
+            
+
+
+            }
+    
+
+
+    } catch (error) {
+       console.error("aya re error",error);
+        
+    }
+
+
+
+    }
+
+    function debounce(fn,delay){
+        let timer;
+        return function(...args){
+            clearTimeout(timer);
+            timer=setTimeout(()=>fn.apply(this,args),delay);
             
         }
-        try {
-        const  res=await fetch(`index.php?route=posts/search&q=${encodeURIComponent(query)}`);
-            const result_json =await res.json();
-            data=result_json.data;
+    }
 
-            if(last_query!==query){
-                return;
-            }
+    const debounced_search =debounce(query_data,300);
 
-            if(data && data.length>0){
-                data.forEach(element => {
-                const item =document.createElement('p');
-                item.textContent=element.title;
-                search_results.appendChild(item);
-            });
-
-
-            }
-                                   
-        
-        } catch (error_log) {
-            console.error("fetch failed",error_log);
-            // search_results.innerHTML=result_json.error;
-        }
-      
-
+    search.addEventListener("input",(e)=>{
+        const query = e.target.value;
+        debounced_search(query);
     })
+   
 
 
 
