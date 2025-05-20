@@ -22,14 +22,19 @@ document.addEventListener("DOMContentLoaded",()=>{
             if(data?.length){
                 
                 data.forEach(item=> {
-                    const element = document.createElement('p');
-                   element.textContent=item.title;
+                    const element = document.createElement('a');
+                   element.href=`index.php?route=posts/details&id=${encodeURIComponent(item.id)}`;
+                    element.style.display='block';
+                    element.textContent=item.title;
+                    element.target='_blank';
                     search_results.appendChild(element);
                 
 
                 });
-
-
+ //
+ // before proceeding i want one basic thing that on live search apparently our logic shows $post['title']
+ //                but i want make it clickable when user clicks it i have made route and view   index.php?route=details&id ..it goes to detail page 
+ //
 
             }else{
 

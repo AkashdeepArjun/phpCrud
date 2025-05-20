@@ -65,4 +65,6 @@ background-color: yellow;
     color: magenta;
 }
 
-
+#search_results>*{
+    padding: 1rem;
+}
