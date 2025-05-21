@@ -38,6 +38,10 @@
         require_once PROJECT_ROOT.'/presenter/postPresenter.php';
         get_query_suggestions();
         break;
+    case 'posts/log':
+        require_once PROJECT_ROOT.'/presenter/postPresenter.php';
+        log_search_query();
+        break;
     default:
         echo "404 not found ";
         break;

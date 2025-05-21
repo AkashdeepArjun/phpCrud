@@ -70,6 +70,8 @@ static function delete($id){
 
         }
 
+        
+
 
 
 

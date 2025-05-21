@@ -9,6 +9,40 @@ document.addEventListener("DOMContentLoaded",()=>{
     let last_query='';
     search_container.style.display='none';
 
+    const log_query = async (query)=>{
+
+    if(!query) return;
+        try {
+            
+            const res = await fetch(`input.php?route=posts/log&q=${encodeURIComponent(query)}`,{
+                
+                method:"POST",
+                headers:{
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body:new URLSearchParams({q:query})
+
+            });
+        const json  = await res.json();
+        if(json.status){
+            console.log(json.status);
+        }else{
+            console.log(json.fail);
+        }
+        } catch (error) {
+           console.log(error); 
+        }
+
+
+
+
+
+// check 
+
+    }
+
+
+
     const query_data=async (query)=>{
    
     last_query=query;
@@ -29,10 +63,10 @@ document.addEventListener("DOMContentLoaded",()=>{
             
             if(data?.length){
                 
+                search_container.style.display='block';
                 data.forEach(item=> {
                     const element = document.createElement('a');
                    element.href=`index.php?route=posts/details&id=${encodeURIComponent(item.id)}`;
-                    search_container.style.display='block';
                     element.style.display='block';
                     element.textContent=item.title;
                     element.target='_blank';
@@ -40,7 +74,8 @@ document.addEventListener("DOMContentLoaded",()=>{
                         setTimeout(()=>{
                         e.preventDefault();
                         search_container.style.display='none';
-                        search.value='';
+                            search.value='';
+                            log_query(query);
                         },100)
                     });
                     search_results.appendChild(element);
@@ -174,6 +209,23 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 
     })
+
+    // search.addEventListener("keydown",(e)=>{
+    //
+    //     if(e.key!="Enter") return;
+    //     const query=search.value.trim();
+    //
+    //     const suggestion_visible = suggestion_box.style.display!=='none'&&suggestion_box.innerHTML.trim()!=='';
+    //
+    //     const results_visible = search_results.style.display!=='none' && search_results.innerHTML.trim()!=='';
+    //
+    //     if( query && (suggestion_visible|| results_visible )){
+    //         log_query(query);
+    //     }
+    //
+    //
+    //
+    // });
    
  // i have not set search container so how i add click event at last you mentioned 
 

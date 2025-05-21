@@ -119,9 +119,7 @@ function search_posts(){
         exit;
     }
 
-    $db = getDB();
-    $stmt = $db->prepare("INSERT INTO popular_queries (q,count) VALUES (?,1) ON DUPLICATE KEY UPDATE count=count+1");
-    $stmt->execute([$q]);
+   
 
 
     if($q!=''){
@@ -143,6 +141,30 @@ function search_posts(){
 
 
 }
+function log_search_query(){
+    $q=$_POST['q']??'';
+    
+    $q = trim($q);
+
+    if($q==='') return;
+    
+    header('Content-Type: application/json');
+
+    try {
+
+    $db = getDB();
+    $stmt = $db->prepare("INSERT INTO popular_queries (q,count) VALUES (?,1) ON DUPLICATE KEY UPDATE count=count+1");
+    $stmt->execute([$q]);
+    echo json_encode(['status'=>'ok']);
+
+   
+    } catch (\Throwable $th) {
+        //throw $th;
+        echo json_encode(['fail'=>$th->getMessage()]);
+    }
+}
+
+
 
 function get_query_suggestions(){
 
