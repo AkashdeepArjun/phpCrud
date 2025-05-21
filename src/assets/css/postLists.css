@@ -2,7 +2,13 @@
 html{
     font-size: 8px;
 }
+:root{
 
+    --search-bar-height:2rem;
+    --search-container-left:22%;
+
+
+}
 /* body{ */
 /*     background-color: green; */
 /* } */
@@ -37,9 +43,9 @@ a .del{
 border: 0.25rem sold gray;
 padding: 0.75rem;
 width: 25rem;
-height: 2rem;
+height: var(--search-bar-height);
 position: absolute;
-left: 22%;
+left:var(--search-container-left);
 top: 2%;
 }
 
@@ -53,9 +59,9 @@ top: 2%;
 #search_results{
     height: max-content;
     width: 25rem;
-    position: absolute;
-    top:12%;
-    left: 22%;
+    position: relative;
+    top:0;
+    left:0; 
     background-color:#506973ff;
     padding-left: 1rem;
 }
@@ -68,3 +74,33 @@ background-color: yellow;
 #search_results>*{
     padding: 1rem;
 }
+
+#suggestions{
+background-color:pink;
+color: black;
+position: relative;
+width: 25%;
+height: max-content;
+/* top: calc(var(--search_results_top)+10rem); */
+/* left: var(--search_results_top_offset); */
+top: 0;
+left: 0;
+
+}
+
+.search_container{
+    width: max-content;
+    height: max-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3,1fr);
+    gap:1rem;
+    position: absolute;
+    left: var(--search-container-left);
+    top:15%;
+    background-color:#87f;
+    padding: 0.75rem;
+
+}
+
+

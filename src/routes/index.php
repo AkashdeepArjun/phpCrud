@@ -34,6 +34,10 @@
         require_once PROJECT_ROOT.'/presenter/postPresenter.php';
         post_details();
         break;
+    case 'posts/suggestions':
+        require_once PROJECT_ROOT.'/presenter/postPresenter.php';
+        get_query_suggestions();
+        break;
     default:
         echo "404 not found ";
         break;

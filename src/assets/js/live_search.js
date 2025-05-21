@@ -3,15 +3,23 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     const search = document.getElementById('search');
     const search_results=document.getElementById('search_results');
+    const suggestion_box=document.getElementById('suggestions');
+    const search_container =document.querySelector('.search_container');
     var data=null;
     let last_query='';
+    search_container.style.display='none';
 
     const query_data=async (query)=>{
    
     last_query=query;
     search_results.innerHTML='';
+    // search_container.style.display='none';
     
-    if(!query) return;
+    if(!query){
+    search_container.style.display='none';
+    return;
+
+    }
     try {
       const result=await fetch(`index.php?route=posts/search&q=${encodeURIComponent(query)}`);
         const json_data= await result.json();
@@ -24,9 +32,17 @@ document.addEventListener("DOMContentLoaded",()=>{
                 data.forEach(item=> {
                     const element = document.createElement('a');
                    element.href=`index.php?route=posts/details&id=${encodeURIComponent(item.id)}`;
+                    search_container.style.display='block';
                     element.style.display='block';
                     element.textContent=item.title;
                     element.target='_blank';
+                    element.addEventListener("click",(e)=>{
+                        setTimeout(()=>{
+                        e.preventDefault();
+                        search_container.style.display='none';
+                        search.value='';
+                        },100)
+                    });
                     search_results.appendChild(element);
                 
 
@@ -46,6 +62,8 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 
             }
+
+          
     
 
 
@@ -58,6 +76,74 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     }
 
+    const show_suggestions=async (query)=>{
+
+        // its gonna show live search results and suggestions in same div?
+
+            // i will choose 2 divs method for now  and make sure you work according t debounce query logic as we did before
+
+        suggestion_box.innerHTML='';
+        suggestion_box.style.display='none';
+
+        if(!query) return;
+
+        try {
+        
+            const result = await fetch(`index.php?route=posts/suggestions&q=${encodeURIComponent(query)}`);
+            const json = await result.json();
+            const suggestions = json.suggestions;
+            console.log('suggestions are ',suggestions);
+            if(suggestions?.length){
+                
+                suggestions.forEach(suggestion => {
+                    
+                    const ui_item = document.createElement('p');
+                    ui_item.textContent=suggestion;
+                    ui_item.onclick=(e)=>{
+                        search.value=suggestion;
+                        search_results.innerHTML='';
+                        suggestion_box.innerHTML='';
+                        suggestion_box.style.display='none';
+                        setTimeout(()=>{
+                           e.preventDefault();
+                            search_container.style.display='none';
+
+                        },100);
+                        query_data(query);
+
+                    };
+                    suggestion_box.appendChild(ui_item);
+
+
+                });
+
+                suggestion_box.style.display='block';
+
+
+
+            }
+
+
+        } catch (error) {
+           console.error('suggestions failed with werror',error);
+            
+        }
+
+
+
+
+
+    }
+
+
+
+
+
+
+// its storing queries on database on every input change which is costly i mean query is valid if user presses enter or clicks only then query should be logged
+//beside this its not showing suggestions on div 
+
+
     function debounce(fn,delay){
         let timer;
         return function(...args){
@@ -69,12 +155,27 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     const debounced_search =debounce(query_data,300);
 
+    const handle_search = debounce ((q)=>{
+        query_data(q);
+        show_suggestions(q);
+    },300)
+
     search.addEventListener("input",(e)=>{
-        const query = e.target.value;
-        debounced_search(query);
+        const query = e.target.value.trim();
+        // debounced_search(query);
+        handle_search(query);
+    })
+
+    document.addEventListener("click",(event)=>{
+
+        if(!search_container.contains(event.target)){
+            suggestion_box.style.display='none';
+        } 
+
+
     })
    
-
+ // i have not set search container so how i add click event at last you mentioned 
 
 
 })

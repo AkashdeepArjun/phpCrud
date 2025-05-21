@@ -110,6 +110,20 @@ function search_posts(){
     
     $q=$_GET['q']??'';
     $q=trim($q);
+
+    header('Content-Type: application/json');
+
+
+    if($q===''){
+        echo json_encode(['data'=>[]]);
+        exit;
+    }
+
+    $db = getDB();
+    $stmt = $db->prepare("INSERT INTO popular_queries (q,count) VALUES (?,1) ON DUPLICATE KEY UPDATE count=count+1");
+    $stmt->execute([$q]);
+
+
     if($q!=''){
         
         $results=Post::search_by_title_content($q);
@@ -127,6 +141,34 @@ function search_posts(){
 
 
 
+
+}
+
+function get_query_suggestions(){
+
+    $q=$_GET['q']??'';
+    $q=trim($q);
+    header('Content-Type: application/json');
+    
+    if($q===''){
+        echo json_encode(['suggestions'=>[]]);
+        error_log('empty suggestions');
+        exit;
+    }
+
+    $db =getDB();
+    $stmt=$db->prepare('SELECT q from popular_queries where q LIKE ? ORDER BY count DESC LIMIT 5');
+    $final_q="%".$q."%";
+    $stmt->execute([$final_q]);
+    $suggestions=$stmt->fetchAll(PDO::FETCH_COLUMN);
+    echo json_encode(['suggestions'=>$suggestions]);
+    exit;
+
+
+ 
+    // there is issue that we are logging queries on db  on change listener which is costly since it is saving 
+    // query on db everytime text changes but logging should happen when user select one of search results sending you my js <fieldset>
+        
 
 }
 

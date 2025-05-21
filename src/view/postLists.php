@@ -18,9 +18,14 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
     <body>
 
         <input id="search" type="text" class="search_bar" placeholder="search items">
-        <div id="search_results">
+        <div class="search_container">
+            <div id="search_results"></div>
+            <h1>suggestions</h1>
+            <div id="suggestions"></div>
             
         </div>
+        
+            
         <!-- <h1>BASE URL is <?= BASE_URL ?></h1> -->
         <h1>Posts</h1>
         <a href="index.php?route=posts/create">Create New Post</a>
