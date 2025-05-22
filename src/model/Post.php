@@ -69,8 +69,32 @@ static function delete($id){
 
 
         }
+                
+                
+        static function paginate($data_per_page,$offset){
+
+                $db=getDB();
+                $stmt=$db->prepare("SELECT * FROM posts ORDER BY created_at DESC LIMIT ? OFFSET ?");
+                $stmt->bindValue(1,(int)$data_per_page,PDO::PARAM_INT);
+                $stmt->bindValue(2,(int)$offset,PDO::PARAM_INT);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                
+
+
+
+
+        }
+
+        static function entries(){
+                
+                $db=getDB();
+                return $db->query("SELECT COUNT(*) FROM posts")->fetchColumn();
 
         
+
+        }
+
 
 
 

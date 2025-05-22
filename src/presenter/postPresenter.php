@@ -3,7 +3,13 @@ ob_clean();
 require_once PROJECT_ROOT.'/model/Post.php';
 function listposts(){
 
-    $posts=Post::all();
+    /* $posts=Post::all(); */
+    $page=isset($_GET['page'])?max(1,(int)$_GET['page']):1;
+    $data_per_page=7;
+    $offset =($page-1)*$data_per_page;
+    $posts=Post::paginate($data_per_page,$offset);
+    $total_posts=Post::entries();
+    $total_pages=ceil($total_posts/$data_per_page); 
     require PROJECT_ROOT. '/view/postLists.php' ;
 
 

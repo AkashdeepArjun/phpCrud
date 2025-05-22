@@ -29,6 +29,9 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
         <!-- <h1>BASE URL is <?= BASE_URL ?></h1> -->
         <h1>Posts</h1>
         <a href="index.php?route=posts/create">Create New Post</a>
+
+
+        
         <table>
             <thead>
 
@@ -72,8 +75,16 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
                 </tbody>
             </thead>
         </table>
+<div class="pages_cont">
+    
+<?php for ($i=1;$i<=$total_pages;$i++): ?>
+        <div class="page_no" >
+        <a href="index.php?route=posts&page=<?=$i?>" <?=$i==$page?'class=active':''?>><?=$i?> </a>
+        </div>
+<?php endfor;?>
 
 
+</div>
         <script>
         const force_reload =(e)=>{
             if(e.persisted){
