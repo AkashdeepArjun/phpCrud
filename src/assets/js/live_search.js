@@ -71,11 +71,11 @@ document.addEventListener("DOMContentLoaded",()=>{
                     element.textContent=item.title;
                     element.target='_blank';
                     element.addEventListener("click",(e)=>{
+                        log_query(query);
                         setTimeout(()=>{
                         e.preventDefault();
                         search_container.style.display='none';
                             search.value='';
-                            log_query(query);
                         },100)
                     });
                     search_results.appendChild(element);
@@ -142,6 +142,7 @@ document.addEventListener("DOMContentLoaded",()=>{
                         setTimeout(()=>{
                            e.preventDefault();
                             search_container.style.display='none';
+                            log_query(query);
 
                         },100);
                         query_data(query);
@@ -198,7 +199,26 @@ document.addEventListener("DOMContentLoaded",()=>{
     search.addEventListener("input",(e)=>{
         const query = e.target.value.trim();
         // debounced_search(query);
+        if(e.key=="Enter"){
+            console.log('shall i log query if e.key ==enter');
+        }
         handle_search(query);
+    })
+
+    search.addEventListener("keydown",(e)=>{
+
+        if(e.key=="Enter"){
+            const query=e.target.value.trim();
+            if(query){
+                log_query(query);
+                search.value='';
+                search_container.style.display='none';
+
+            }
+
+        }
+
+
     })
 
     document.addEventListener("click",(event)=>{
@@ -207,7 +227,7 @@ document.addEventListener("DOMContentLoaded",()=>{
             suggestion_box.style.display='none';
         } 
 
-
+// apparently i am logging query only on clicking items in search results or suggestions an now considering to log query when user presses enter after typng query
     })
 
     // search.addEventListener("keydown",(e)=>{
