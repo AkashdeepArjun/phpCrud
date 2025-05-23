@@ -6,6 +6,7 @@ html{
 
     --search-bar-height:2rem;
     --search-container-left:22%;
+    --sort-container-left:70%;
 
 
 }
@@ -99,7 +100,24 @@ left: 0;
     left: var(--search-container-left);
     top:15%;
     background-color:#87f;
-    paddin1g: 0.75rem;
+    padding: 0.75rem;
+
+}
+
+.sort_container{
+
+position: absolute;
+top: 2%;
+left:var(--sort-container-left);
+width: max-content;
+height: max-content;
+padding: 0.25rem;
+display: grid;
+grid-template-columns: 1fr 2fr;
+grid-template-rows: 1fr;
+gap:0.25rem;
+align-items: last baseline;
+
 
 }
 /* thank you for helping so far ..sorting and filtering we will be doing for learning how stuff works and last would be deployment after successful deployment i will work on personal project  */

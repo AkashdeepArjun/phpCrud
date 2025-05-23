@@ -24,6 +24,14 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
             <div id="suggestions"></div>
             
         </div>
+        <div class="sort_container">
+            <label for="sorting">Sort By</label>
+            <select>
+                <option >date</option>
+                <option> title</option>
+            </select>
+            
+        </div>
         
             
         <!-- <h1>BASE URL is <?= BASE_URL ?></h1> -->
