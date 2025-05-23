@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded",()=>{
     if(current_option){
         options.value=current_option;
     }
-
+//i think filtering  will take longer time to learn so i am thinking of making login/signup with user role based support like only some users are allowd to add post delete posts something liket that before that can you explain how role based things works like infacebook somepone blocks other user or settings like content visible only to few users 
 
 
 })

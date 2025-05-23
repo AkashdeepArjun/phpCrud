@@ -120,9 +120,6 @@ align-items: last baseline;
 
 
 }
-/* thank you for helping so far ..sorting and filtering we will be doing for learning how stuff works and last would be deployment after successful deployment i will work on personal project  */
-/* sorting and filtering  i will do it by tomorow if these are not too hard   */
-/* almost forgot login and signup logic with encryped url ...we will do these at last lol */
 .pages_cont{
     display: flex;
     flex-flow: row nowrap;
