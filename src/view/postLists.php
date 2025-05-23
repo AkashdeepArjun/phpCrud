@@ -1,6 +1,8 @@
 <?php
 $css_path=BASE_URL.'assets/css/postLists.css';
 $js_path=BASE_URL.'assets/js/live_search.js';
+$sorting_js_path =BASE_URL.'assets/js/sorting.js';
+$sorting_js_ver=filesize($sorting_js_path)?filemtime($sorting_js_path):time();
 $ver=file_exists($css_path)?filemtime($css_path):time();
 $js_ver=file_exists($js_path)?filemtime($js_path):time();
 ?>
@@ -26,9 +28,11 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
         </div>
         <div class="sort_container">
             <label for="sorting">Sort By</label>
-            <select>
-                <option >date</option>
-                <option> title</option>
+            <select id="sorting">
+                <option value="date_desc" >Date (Newest First)</option>
+                <option value="date_asc">Date (Oldest First) </option>
+                <option value="title_asc">title (A-Z)</option>
+                <option value="title_desc">title (Z-A)</option>
             </select>
             
         </div>
@@ -105,6 +109,11 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
 <script type="text/javascript" src="<?= BASE_URL ?>assets/js/live_search.js?v=<?=$js_ver?>">
             
         </script>
+
+<script type="text/javascript" src="<?=BASE_URL?>assets/js/sorting.js?v=<?=$sorting_js_ver?>">
+    
+
+</script>
 
     </body>
 </html>

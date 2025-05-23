@@ -7,7 +7,36 @@ function listposts(){
     $page=isset($_GET['page'])?max(1,(int)$_GET['page']):1;
     $data_per_page=7;
     $offset =($page-1)*$data_per_page;
-    $posts=Post::paginate($data_per_page,$offset);
+    $order_by='created_at DESC';
+    $sort_choice=$_GET['sort']??'date_desc';
+    switch ($sort_choice) {
+        case 'title_asc':
+            $order_by='title ASC';
+
+            break;
+        
+        case 'title_desc':
+            $order_by='title DESC';
+            break;
+
+        case 'date_asc':
+            $order_by='created_at ASC';
+            break;
+
+
+        case 'date_desc':
+            $order_by='created_at DESC';
+            break;
+
+
+        default:
+            $order_by='created_at DESC';
+            break;
+    }
+    
+
+
+    $posts=Post::paginate($data_per_page,$offset,$order_by);
     $total_posts=Post::entries();
     $total_pages=ceil($total_posts/$data_per_page); 
     require PROJECT_ROOT. '/view/postLists.php' ;
