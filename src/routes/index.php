@@ -42,9 +42,37 @@
         require_once PROJECT_ROOT.'/presenter/postPresenter.php';
         log_search_query();
         break;
+    case 'signup':
+        require_once PROJECT_ROOT.'/presenter/postPresenter.php';
+        signup();
+        break;
+    case 'signup/submit':
+
+        require_once PROJECT_ROOT.'/presenter/postPresenter.php';
+        signup_submit();
+        break;
+
+    case 'login':
+        require_once PROJECT_ROOT.'/presenter/postPresenter.php';
+        login();
+        break;
+
+    case 'login/submit':
+            require_once PROJECT_ROOT.'/presenter/postPresenter.php';
+            login_submit();
+        break;
+
+    case 'logout':
+            session_destroy();
+            header("Location: index.php?route=login");
+            exit;
+        break;
+
     default:
         echo "404 not found ";
         break;
     }
 ?>
-
+//phew thats done and how we check role of user using session like this $_session['role']=='admin' like we did in require login ?
+// if we using header from backend  eont it be stacked in history
+// one more thing cant someone ovrride myseesion variable and login  

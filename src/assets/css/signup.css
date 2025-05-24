@@ -1,0 +1,52 @@
+html{
+    font-size: 8px;
+}
+
+:root{
+
+
+    --container-width:60rem;
+    --container-height:40rem;
+    --container-bg: #967300;
+    --input-padding:1rem;
+    
+
+
+}
+
+
+.cont{
+    
+    position: absolute;
+    top: 2%;
+    left: 25%;
+    width: 50rem;
+    height: max-content;
+    padding:1rem;
+    background-color: var(--container-bg);
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    align-items: center;
+
+
+}
+
+
+input{
+
+    border: 0.125rem solid gray;
+    padding: var(--input-padding);
+    width:25rem;
+}
+
+.submit{
+
+    border-radius: 1rem;
+    padding: 2rem;
+    background-color: blue;
+    color: white;
+    flex-grow: 0;
+    width: max-content;
+    align-self: center;
+}

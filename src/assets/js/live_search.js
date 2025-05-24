@@ -57,12 +57,9 @@ document.addEventListener("DOMContentLoaded",()=>{
     try {
       const result=await fetch(`index.php?route=posts/search&q=${encodeURIComponent(query)}`);
         const json_data= await result.json();
-        const data =json_data.data;
-
+        const data=json_data.data;
             if(query!=last_query) return;
-            
             if(data?.length){
-                
                 search_container.style.display='block';
                 data.forEach(item=> {
                     const element = document.createElement('a');
@@ -82,26 +79,13 @@ document.addEventListener("DOMContentLoaded",()=>{
                 
 
                 });
- //
- // before proceeding i want one basic thing that on live search apparently our logic shows $post['title']
- //                but i want make it clickable when user clicks it i have made route and view   index.php?route=details&id ..it goes to detail page 
- //
-
             }else{
 
                     const element = document.createElement('p');
                     element.textConten="data did not avaialble";
                     element.style.color="gray";
                     search_results.appendChild(element);
-            
-
-
             }
-
-          
-    
-
-
     } catch (error) {
        console.error("aya re error",error);
         
@@ -197,14 +181,11 @@ document.addEventListener("DOMContentLoaded",()=>{
     },300)
 
     search.addEventListener("input",(e)=>{
-        const query = e.target.value.trim();
-        // debounced_search(query);
-        if(e.key=="Enter"){
-            console.log('shall i log query if e.key ==enter');
-        }
+        console.log('typed',e.target.value);
+        const query = e.target.value.trim(); 
         handle_search(query);
     })
-
+//checked console log it s complaining about non whitepspace character after json 
     search.addEventListener("keydown",(e)=>{
 
         if(e.key=="Enter"){

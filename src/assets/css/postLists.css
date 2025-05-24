@@ -125,6 +125,15 @@ align-items: last baseline;
     flex-flow: row nowrap;
 }
 
+.logout{
+    position: absolute;
+    top: 2%;
+    left: 90%;
+    background-color: red;
+    color: white;
+}
+
+
 .page_no{
     width: 1rem;
     height: 1rem;

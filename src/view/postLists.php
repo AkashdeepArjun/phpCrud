@@ -2,7 +2,7 @@
 $css_path=BASE_URL.'assets/css/postLists.css';
 $js_path=BASE_URL.'assets/js/live_search.js';
 $sorting_js_path =BASE_URL.'assets/js/sorting.js';
-$sorting_js_ver=filesize($sorting_js_path)?filemtime($sorting_js_path):time();
+$sorting_js_ver=file_exists($sorting_js_path)?filemtime($sorting_js_path):time();
 $ver=file_exists($css_path)?filemtime($css_path):time();
 $js_ver=file_exists($js_path)?filemtime($js_path):time();
 ?>
@@ -18,6 +18,15 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
         <link href="<?= BASE_URL ?>assets/css/postLists.css?v=<?=$ver?>" rel="stylesheet">
     </head>
     <body>
+            
+        <?php if(!empty($_SESSION['user_id'])): ?>
+            
+            <p class="logout">Welcome <?=htmlspecialchars($_SESSION['user_id'])?>| <a href="index.php?route=logout">Logout</a> </p>
+
+            
+        <?php endif; ?>
+
+
 
         <input id="search" type="text" class="search_bar" placeholder="search items">
         <div class="search_container">
@@ -106,14 +115,14 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
         window.addEventListener("pageshow",force_reload);
     </script>
 
-<script type="text/javascript" src="<?= BASE_URL ?>assets/js/live_search.js?v=<?=$js_ver?>">
-            
-        </script>
+
 
 <script type="text/javascript" src="<?=BASE_URL?>assets/js/sorting.js?v=<?=$sorting_js_ver?>">
     
 
 </script>
-
+<script type="text/javascript" src="<?= BASE_URL ?>assets/js/live_search.js?v=<?=$js_ver?>">
+            
+        </script>
     </body>
 </html>
