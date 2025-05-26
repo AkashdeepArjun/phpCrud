@@ -33,6 +33,9 @@ th,td{
 table{
     width: 100%;
     border-collapse: collapse;
+    position: absolute;
+    top: 25%;
+    z-index: -1;
 }
 
 a .del{
@@ -50,6 +53,11 @@ left:var(--search-container-left);
 top: 2%;
 }
 
+body>h1{
+    position: absolute;
+    top: 2%;
+    left: 5%;
+}
 
 .search_bar:hover,
 .search_bar:focus{
@@ -98,7 +106,7 @@ left: 0;
     gap:1rem;
     position: absolute;
     left: var(--search-container-left);
-    top:15%;
+    top:12%;
     background-color:#87f;
     padding: 0.75rem;
 
@@ -140,13 +148,113 @@ align-items: last baseline;
     background-color: green;
     color: white;
     flex-grow: 0;
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
 }
 
 .active{
 background-color: purple;
 color: white;
+transform: scale(2.0);
 
 }
+
+.new_post{
+
+background-color: green;
+padding: 1rem;
+width: max-content;
+height: 2rem;
+align-items: center;
+justify-content: center;
+position: absolute;
+top: 2%;
+left: 60%;
+color: white;
+align-content: center;
+}
+
+
+
+.hamburger{
+
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+}
+
+.close_hamburger{
+
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+    position: absolute;
+    z-index: 21;
+    top: 0;
+    right: 0;
+
+
+
+}
+
+.close_hamburger:hover{
+
+    background-color: blue;
+
+}
+
+.sidebar{
+
+    width: 25%;
+    height: 100%;
+    background-color:rgb(160 195 95 / 85%) ;
+    transform: translateX(-100%);
+    transition: 200ms transform ease-in 0s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    /* justify-content: center; */
+    display: flex;
+    flex-flow: column nowrap;
+    justify-items: center;
+
+
+}
+
+.show_sidebar{
+    
+    transform: translateX(0%);
+
+
+}
+
+
+.myform{
+
+    width: max-content;
+    height: max-content;
+    padding: 1rem;
+    /* align-items: center; */
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    flex-flow: column nowrap;
+    background-color:#877d64 ;
+    justify-self: center;
+    align-self: center;
+    position: absolute;
+    top: 25%;
+    gap: 2rem;
+}
+
+
 
 
 

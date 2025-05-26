@@ -14,7 +14,7 @@ options.addEventListener("change",()=>{
 
 
 // thanks it worked but everytime i sort its stacking like addding url to stack history on client side is it a good idea ? coz its stacking
-//coz on pressing back it goes to previous sorted opton 
+//coz on pressing back it goes to previous sorted opton phe
 
 
 

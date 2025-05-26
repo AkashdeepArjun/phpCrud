@@ -3,8 +3,21 @@ ob_clean();
 require_once PROJECT_ROOT.'/model/Post.php';
 function listposts(){
 
-        reguire_login();
-    /* $posts=Post::all(); */
+    reguire_login();
+
+    $filter_title =$_GET['filter_title']??'';
+    $where='';
+    $params=[];
+    
+    if(!empty(trim($filter_title))){
+    
+        $where='WHERE title LIKE ? ';
+        $params[]="%$filter_title%";
+
+
+    }
+
+    //
     $page=isset($_GET['page'])?max(1,(int)$_GET['page']):1;
     $data_per_page=7;
     $offset =($page-1)*$data_per_page;
@@ -13,8 +26,7 @@ function listposts(){
     switch ($sort_choice) {
         case 'title_asc':
             $order_by='title ASC';
-            break;
-        
+            break; 
         case 'title_desc':
             $order_by='title DESC';
             break;
@@ -23,24 +35,24 @@ function listposts(){
             $order_by='created_at ASC';
             break;
 
-
         case 'date_desc':
             $order_by='created_at DESC';
             break;
-
-
+            
         default:
             $order_by='created_at DESC';
             break;
     }
-    
-    $posts=Post::paginate($data_per_page,$offset,$order_by);
-    $total_posts=Post::entries();
+    error_log("sending WHERE = ".$where);
+    $posts=Post::paginate($data_per_page,$offset,$order_by,$where,$params);
+    $total_posts=Post::enteries($where,$params);
     $total_pages=ceil($total_posts/$data_per_page); 
     require PROJECT_ROOT. '/view/postLists.php' ;
 
 
 }
+
+//i am using mariadb fork of mysql on arch linux
 
 function signup(){
 

@@ -2,7 +2,9 @@
 $css_path=BASE_URL.'assets/css/postLists.css';
 $js_path=BASE_URL.'assets/js/live_search.js';
 $sorting_js_path =BASE_URL.'assets/js/sorting.js';
+$filter_js_path=BASE_URL.'assets/js/filter.js';
 $sorting_js_ver=file_exists($sorting_js_path)?filemtime($sorting_js_path):time();
+$filter_js_ver=file_exists($filter_js_path)?filemtime($filter_js_path):time();
 $ver=file_exists($css_path)?filemtime($css_path):time();
 $js_ver=file_exists($js_path)?filemtime($js_path):time();
 ?>
@@ -18,7 +20,7 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
         <link href="<?= BASE_URL ?>assets/css/postLists.css?v=<?=$ver?>" rel="stylesheet">
     </head>
     <body>
-            
+
         <?php if(!empty($_SESSION['user_id'])): ?>
             
             <p class="logout">Welcome <?=htmlspecialchars($_SESSION['user_id'])?>| <a href="index.php?route=logout">Logout</a> </p>
@@ -49,9 +51,20 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
             
         <!-- <h1>BASE URL is <?= BASE_URL ?></h1> -->
         <h1>Posts</h1>
-        <a href="index.php?route=posts/create">Create New Post</a>
+        <a href="index.php?route=posts/create" class="new_post">Create New Post</a>
+        
+        <img src="<?=BASE_URL?>assets/images/menu.png" alt="" class="hamburger">
+        <div class="sidebar">
+            <img src="<?=BASE_URL?>assets/images/cross.png" alt="" class="close_hamburger">
+            <!---->
+            <form id="filters" class="myform">
+                <label for="title">Filter by title</label>
+                <input type="" name="filter_title" value="">
+                <button type="submit">Filter</button>
+            </form>
+            
 
-
+        </div> 
         
         <table>
             <thead>
@@ -121,8 +134,16 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
     
 
 </script>
-<script type="text/javascript" src="<?= BASE_URL ?>assets/js/live_search.js?v=<?=$js_ver?>">
+        <script type="text/javascript" src="<?= BASE_URL ?>assets/js/live_search.js?v=<?=$js_ver?>">
+
+        </script>
+
+    
+<script type="text/javascript" src="<?=BASE_URL?>assets/js/filter.js?v=<?=$filter_js_ver?>">
             
         </script>
+
+
+        
     </body>
 </html>

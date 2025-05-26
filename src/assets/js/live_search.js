@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         }
 
 
-
+//i am getting mysql mariadb syntax here inspect my code if i am writing right queries
 
 
 // check 

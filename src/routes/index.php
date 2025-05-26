@@ -73,6 +73,3 @@
         break;
     }
 ?>
-//phew thats done and how we check role of user using session like this $_session['role']=='admin' like we did in require login ?
-// if we using header from backend  eont it be stacked in history
-// one more thing cant someone ovrride myseesion variable and login  

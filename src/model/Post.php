@@ -69,28 +69,41 @@ static function delete($id){
 
 
         }
+ 
                 
-                
-        static function paginate($data_per_page,$offset,$order_by='created_at DESC'){
+        static function paginate($data_per_page,$offset,$order_by='created_at DESC',$where='',$params=[]){
 
                 $db=getDB();
-                $stmt=$db->prepare("SELECT * FROM posts ORDER BY $order_by LIMIT ? OFFSET ?");
-                $stmt->bindValue(1,(int)$data_per_page,PDO::PARAM_INT);
-                $stmt->bindValue(2,(int)$offset,PDO::PARAM_INT);
-                $stmt->execute();
+                $query="SELECT * FROM posts";
+                if(!empty($where)){
+                        
+                        $query.=" $where";
+                        
+                }
+                $query.=" ORDER BY $order_by LIMIT $data_per_page OFFSET $offset";
+                $stmt=$db->prepare($query);
+                error_log('QUERY PASSED '.$query);
+                error_log('PASSED PARAMETERS'.json_encode($params)); 
+                $stmt->execute($params);
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
 
-
-
-
         }
 
-        static function entries(){
+        //inititlay when page loads $where is supposed to be empty isnt?
+
+        static function enteries($where='',$params=[]){
                 
                 $db=getDB();
-                return $db->query("SELECT COUNT(*) FROM posts")->fetchColumn();
-
+                $query = "SELECT COUNT(*) FROM posts";
+                if(!empty(trim($where))){
+                    
+                        $query.=" $where ";
+                        
+                } 
+                $stmt=$db->prepare($query);
+                $stmt->execute($params);
+                return $stmt->fetchColumn();
         
 
         }
