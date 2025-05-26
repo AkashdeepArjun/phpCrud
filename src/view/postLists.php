@@ -60,9 +60,16 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
             <form id="filters" class="myform">
                 <label for="title">Filter by title</label>
                 <input type="" name="filter_title" value="">
+                <input type="date" name="filter_from" value="">
+                <input type="date" name="filter_to" value="">
                 <button type="submit">Filter</button>
             </form>
+
+            <div class="clear_filters">
+
+                <button>CLEAR FILTERS</button>
             
+           </div> 
 
         </div> 
         

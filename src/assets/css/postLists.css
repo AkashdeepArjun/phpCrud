@@ -254,7 +254,22 @@ align-content: center;
     gap: 2rem;
 }
 
+.clear_filters{
 
+    padding: 1rem;
+    background-color:#8200aaff ;
+    position: relative;
+    top: 80%;
+    /* left: 15%; */
+justify-content: center;
+align-items: center;
+align-self: center;
+justify-items: center;
+justify-self: center;
+
+
+
+}
 
 
 

@@ -8,7 +8,13 @@ const close_hamburger = document.querySelector('.close_hamburger');
     
 const sidebar = document.querySelector('.sidebar');
 const filters =document.getElementById('filters');
-hamburger.addEventListener("click",()=>{
+
+const params=new URLSearchParams(window.location.search);
+
+const clear_filters=document.querySelector('.clear_filters');
+
+
+    hamburger.addEventListener("click",()=>{
 
     sidebar.classList.add("show_sidebar");
 
@@ -32,7 +38,6 @@ close_hamburger.addEventListener("click",()=>{
 filters.addEventListener("submit",function(e){
         const title = this.filter_title.value.trim();
         console.log('title is ',title);
-        const params=new URLSearchParams(window.location.search);
         sidebar.classList.remove('show_sidebar');
         if(title){
             
@@ -52,7 +57,11 @@ filters.addEventListener("submit",function(e){
     }); 
 
 
-
+    clear_filters.addEventListener("click",()=>{
+        params.delete('filter_title');
+        params.set('page',1);
+        window.location.href=`index.php?route=posts&${params.toString()}`
+    })
 
 
 
