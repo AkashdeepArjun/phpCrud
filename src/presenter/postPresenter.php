@@ -6,18 +6,32 @@ function listposts(){
     reguire_login();
 
     $filter_title =$_GET['filter_title']??'';
+    $filter_from=$_GET['filter_from']??'';
+    $filter_to=$_GET['filter_to']??'';
     $where='';
     $params=[];
     
     if(!empty(trim($filter_title))){
     
-        $where='WHERE title LIKE ? ';
+        $where="AND title LIKE ?";
         $params[]="%$filter_title%";
 
 
     }
 
-    //
+    if(!empty(trim($filter_from))){
+        /* $params['from']=$filter_from; */
+        $where .=" AND created_at > ?";          
+        $params[]=$filter_from;
+    }
+
+    if(!empty(trim($filter_to))){
+        /* $params['to']=$filter_to; */
+        $where .=" AND created_at < ? ";
+        $params[]=date('Y-m-d',strtotime($filter_to.'+1 day'));
+
+    }
+
     $page=isset($_GET['page'])?max(1,(int)$_GET['page']):1;
     $data_per_page=7;
     $offset =($page-1)*$data_per_page;

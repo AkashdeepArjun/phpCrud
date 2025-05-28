@@ -77,7 +77,7 @@ static function delete($id){
                 $query="SELECT * FROM posts";
                 if(!empty($where)){
                         
-                        $query.=" $where";
+                        $query .= " WHERE 1=1 ". $where;
                         
                 }
                 $query.=" ORDER BY $order_by LIMIT $data_per_page OFFSET $offset";
@@ -96,9 +96,9 @@ static function delete($id){
                 
                 $db=getDB();
                 $query = "SELECT COUNT(*) FROM posts";
-                if(!empty(trim($where))){
+                if(!empty($where)){
                     
-                        $query.=" $where ";
+                        $query .= " WHERE 1=1 ". $where;
                         
                 } 
                 $stmt=$db->prepare($query);
