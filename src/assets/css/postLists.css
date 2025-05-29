@@ -175,6 +175,19 @@ color: white;
 align-content: center;
 }
 
+.manage_users{
+background-color:#a5785fff ;
+padding: 1rem;
+width: max-content;
+height: 2rem;
+align-items: center;
+justify-content: center;
+position: absolute;
+top: 2%;
+left: 50%;
+color: white;
+align-content: center;
+}
 
 
 .hamburger{
@@ -211,8 +224,9 @@ align-content: center;
 
 .sidebar{
 
-    width: 25%;
-    height: 100%;
+    width: 25vw;
+    height: 100vh;
+    padding: 4rem;
     background-color:rgb(160 195 95 / 85%) ;
     transform: translateX(-100%);
     transition: 200ms transform ease-in 0s;
@@ -224,34 +238,47 @@ align-content: center;
     display: flex;
     flex-flow: column nowrap;
     justify-items: center;
-
+    overflow: hidden;
 
 }
 
 .show_sidebar{
     
     transform: translateX(0%);
+    
+
+
+    flex-grow:0}
+
+.hide_form{
+
+    display:flex;
 
 
 }
 
-
 .myform{
 
-    width: max-content;
-    height: max-content;
+    width: min-content;
+    max-width: 100%;
+    height: min-content;
     padding: 1rem;
     /* align-items: center; */
+    display:flex;
+    flex-flow: column nowrap;
     align-content: center;
     justify-content: center;
-    display: flex;
-    flex-flow: column nowrap;
     background-color:#877d64 ;
     justify-self: center;
     align-self: center;
     position: absolute;
     top: 25%;
     gap: 2rem;
+    flex-grow: 0;
+}
+
+.myform>*{
+    box-sizing: border-box;
 }
 
 .clear_filters{

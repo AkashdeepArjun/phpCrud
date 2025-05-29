@@ -1,4 +1,13 @@
 <?php
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
+if(isset($_SESSION['user_id'])){
+        header("Location: index.php?route=posts");
+        exit;
+
+}
+
 $css_path=BASE_URL.'assets/css/signup.css';
 $css_ver=file_exists($css_path)?filemtime($css_path):time();
 

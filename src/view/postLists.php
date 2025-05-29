@@ -52,7 +52,11 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
         <!-- <h1>BASE URL is <?= BASE_URL ?></h1> -->
         <h1>Posts</h1>
         <a href="index.php?route=posts/create" class="new_post">Create New Post</a>
-        
+        <?php if(!empty($_SESSION['user_id']) && $_SESSION['role']=='admin'): ?>
+
+                <a href="index.php?route=posts/manage_users" class="manage_users">Manage Users</a>
+
+        <?php endif; ?>
         <img src="<?=BASE_URL?>assets/images/menu.png" alt="" class="hamburger">
         <div class="sidebar">
             <img src="<?=BASE_URL?>assets/images/cross.png" alt="" class="close_hamburger">

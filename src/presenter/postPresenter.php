@@ -130,6 +130,8 @@ function login_submit(){
         $_SESSION['user_id']=$user['id'];
         $_SESSION['uname']=$user['uname'];
         $_SESSION['role'] =$user['role'];
+        
+        error_log("USER ROLE IS ".$_SESSION['role']);
         session_regenerate_id(true); 
         header("Location: index.php?route=posts");
         exit;

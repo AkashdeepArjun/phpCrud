@@ -18,6 +18,7 @@ const clear_filters=document.querySelector('.clear_filters');
     hamburger.addEventListener("click",()=>{
 
     sidebar.classList.add("show_sidebar");
+    filters.classList.remove("hide_form");
 
 
 
@@ -27,6 +28,7 @@ close_hamburger.addEventListener("click",()=>{
     
 
         sidebar.classList.remove('show_sidebar');
+        filters.classList.add("hide_form");
 
 
 })
