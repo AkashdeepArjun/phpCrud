@@ -5,6 +5,15 @@ require_once PROJECT_ROOT.'/config.php';
 
 class Post{
 
+        static function getUsers(){
+                $db=getDB();
+                $stmt = $db->query("SELECT * from users ");
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+        }
+
 
 static function all() {
 

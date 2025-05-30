@@ -68,6 +68,18 @@
             exit;
         break;
 
+    case 'posts/manage_users':
+
+        require_once PROJECT_ROOT.'/presenter/postPresenter.php';
+        listUsers();
+        break;
+
+    case 'update_permissions':
+        require_once PROJECT_ROOT.'/presenter/postPresenter.php';
+        updatePermissions();
+        break;
+            
+
     default:
         echo "404 not found ";
         break;

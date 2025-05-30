@@ -1,7 +1,65 @@
 <?php
 ob_clean();            
 require_once PROJECT_ROOT.'/model/Post.php';
+
+function listUsers(){
+
+
+    require_once PROJECT_ROOT.'/middlewares/auth.php';
+    require_valid_user();
+    $users =Post::getUsers();
+    require_once PROJECT_ROOT .'/view/manage_users.php';
+
+
+
+}
+
+function updatePermissions(){
+
+
+
+    require_once PROJECT_ROOT.'/middlewares/auth.php';
+    require_valid_user();
+    $db=getDB();
+    if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['permissions']) ){
+
+        foreach ($_POST['permissions'] as $user_id=> $permissions) {
+
+            $uid=(int)$user_id;
+            $permissions_clean = array_map('htmlspecialchars',$permissions);
+            $permissions_string =implode(',',$permissions_clean);
+
+            $query="UPDATE users SET permissions = ? WHERE id = ? ";
+            
+            $stmt=$db->prepare($query);
+
+        $stmt->execute([$permissions_string,$uid]);
+
+        }
+
+            echo json_encode(['status'=>'ok','redirect'=>"index.php?route=posts/manage_users"]); 
+
+           error_log("OKAYYYYYYYYYY"); 
+            
+            return;
+
+
+        }else{
+
+            echo json_encode(['status'=>'failed','msg'=>'updation failed']);
+            return;
+
+        }
+
+
+
+
+    }
+
+
 function listposts(){
+
+    require_once PROJECT_ROOT.'/middlewares/auth.php';
 
     reguire_login();
 
@@ -97,10 +155,10 @@ function signup_submit(){
 
         $db=getDB();
 
-        $stmt=$db->prepare('INSERT INTO users (uname,upass) VALUES (?,?)');
+        $stmt=$db->prepare('INSERT INTO users (uname,upass,permissions) VALUES (?,?,?)');
         try {
             
-            $stmt->execute([$uname,$hashed_pass]);
+            $stmt->execute([$uname,$hashed_pass,'read']);
             header("Location: index.php?route=login");
             exit;
 
@@ -130,6 +188,7 @@ function login_submit(){
         $_SESSION['user_id']=$user['id'];
         $_SESSION['uname']=$user['uname'];
         $_SESSION['role'] =$user['role'];
+        $_SESSION['permissions'] =$user['permissions'];
         
         error_log("USER ROLE IS ".$_SESSION['role']);
         session_regenerate_id(true); 
@@ -202,6 +261,10 @@ function savePost(){
 
 
 function editPost(){
+
+    require_once PROJECT_ROOT.'/middlewares/auth.php';
+
+    require_permission("edit");
     
     $id=$_GET['id']??null;
     if($id){
@@ -326,15 +389,7 @@ function get_query_suggestions(){
 
 }
 
-function reguire_login(){
 
-    if(empty($_SESSION['user_id'])){
-        header("Location: index.php?route=login");
-        exit;
-    }
-
-
-}
 
 
 
