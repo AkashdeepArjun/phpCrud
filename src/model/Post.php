@@ -6,8 +6,11 @@ require_once PROJECT_ROOT.'/config.php';
 class Post{
 
         static function getUsers(){
+                $current_user = $_SESSION['user_id'];
+                $query = "SELECT * FROM users where id != ?";
                 $db=getDB();
-                $stmt = $db->query("SELECT * from users ");
+                $stmt=$db->prepare($query);
+                $stmt->execute([$current_user]);
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
