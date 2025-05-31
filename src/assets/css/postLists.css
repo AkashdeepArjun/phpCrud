@@ -189,6 +189,28 @@ color: white;
 align-content: center;
 }
 
+.plan{
+
+    background-color:#a54b73ff ;
+    font-style: bold;
+    padding: 1rem;
+    width: max-content;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    color: white;
+    align-content: center;
+
+
+}
+
+
+
+
+
 
 .hamburger{
 

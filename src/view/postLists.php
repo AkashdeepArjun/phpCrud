@@ -57,6 +57,23 @@ $js_ver=file_exists($js_path)?filemtime($js_path):time();
                 <a href="index.php?route=posts/manage_users" class="manage_users">Manage Users</a>
 
         <?php endif; ?>
+        
+
+        <?php if(!empty($_SESSION['user_id']) && $_SESSION['is_premium']==0 && $_SESSION['role']!='admin'):?>
+
+        
+            
+        <a href="index.php?route=buy" class="plan">Buy Plan</a>
+
+
+        
+        <?php endif; ?>
+
+
+        
+
+
+
         <img src="<?=BASE_URL?>assets/images/menu.png" alt="" class="hamburger">
         <div class="sidebar">
             <img src="<?=BASE_URL?>assets/images/cross.png" alt="" class="close_hamburger">

@@ -189,7 +189,9 @@ function login_submit(){
         $_SESSION['uname']=$user['uname'];
         $_SESSION['role'] =$user['role'];
         $_SESSION['permissions'] =$user['permissions'];
-        
+        if($user['role']!='admin'){
+            $_SESSION['is_premium'] = $user['is_premium'];
+        }        
         error_log("USER ROLE IS ".$_SESSION['role']);
         session_regenerate_id(true); 
         header("Location: index.php?route=posts");
@@ -390,6 +392,22 @@ function get_query_suggestions(){
 }
 
 
+function buy(){
+    
+    if(!isset($_SESSION['user_id']) || $_SESSION['role']=='admin' || $_SESSION['is_premium']  ){
+
+
+        http_response_code(403);
+       exit('lolwa the tholwa'); 
+
+
+    
+    }
+
+    require PROJECT_ROOT.'/view/buy.php';
+
+
+}
 
 
 

@@ -78,7 +78,12 @@
         require_once PROJECT_ROOT.'/presenter/postPresenter.php';
         updatePermissions();
         break;
-            
+
+    case 'buy':
+
+        require_once PROJECT_ROOT.'/presenter/postPresenter.php';
+        buy();
+        break; 
 
     default:
         echo "404 not found ";
