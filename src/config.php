@@ -7,13 +7,13 @@ define('PROJECT_ROOT', realpath(__DIR__));
 
 define('BASE_URL','/');
 
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'sql207.infinityfree.com');
 
-define('DB_NAME', 'sample');
+define('DB_NAME', 'if0_39164712_sample');
 
-define('DB_USER', 'root');
+define('DB_USER', 'if0_39164712');
 
-define('DB_PASS', 'akash@007');
+define('DB_PASS', 'UcgFrNyNHXcU');
 
 function getDB()
 {
